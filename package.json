@@ -16,7 +16,7 @@
     "url": "https://github.com/marinovich/caesar-cipher-cli/issues"
   },
   "bin": {
-    "caesar-cipher": "bin/outside"
+    "caesar-cipher": "bin/caesar-cipher"
   },
   "homepage": "https://github.com/marinovich/caesar-cipher-cli#readme",
   "engines": {

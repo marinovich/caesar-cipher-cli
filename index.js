@@ -18,7 +18,7 @@ module.exports = () => {
 
     const inputReadStream = createReadStream(input);
     const outputWriteStream = createWriteStream(output);
-    const cipherTransform = createCipherTransform(shift, action, action);
+    const cipherTransform = createCipherTransform(shift, action);
 
     pipeline(
       inputReadStream,
@@ -26,11 +26,11 @@ module.exports = () => {
       outputWriteStream,
       (error) => {
         if (error) {
-          logError('Pipeline failed.', error);
+          logError('Pipeline failed.', error.message);
         }
       }
     );
   } catch (error) {
-    logError('Something went wrong.', error.message);
+    logError(error.message);
   }
 }

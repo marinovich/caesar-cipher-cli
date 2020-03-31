@@ -17,7 +17,7 @@ class CipherTransform extends Transform {
 
   _transform(chunk, encoding, callback) {
     try {
-      const resultString = encrypt(this._shift, chunk.toString('utf-8'));
+      const resultString = encrypt(this._shift, `${chunk.toString('utf-8')}`);
 
       callback(null, resultString);
     } catch (err) {

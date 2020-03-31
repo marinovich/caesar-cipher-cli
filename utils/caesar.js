@@ -1,5 +1,4 @@
 const encrypt = (shift, text) => {
-  console.log()
   return String.fromCharCode(
     ...text.split('').map(char => ((char.charCodeAt() - 97 + shift) % 26) + 97),
   );
