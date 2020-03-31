@@ -7,7 +7,6 @@ const path = require('path');
  * @returns {NodeJS.ReadStream}
  */
 const createReadStream = fileName => {
-  console.log('filename', fileName);
   if (!fileName) {
     return process.stdin;
   }

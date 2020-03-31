@@ -1,5 +1,5 @@
 const program = require('commander');
-const error = require('./utils/error');
+const logError = require('./utils/error');
 const { pipeline } = require('stream');
 const createReadStream = require('./streams/createReadStream');
 const createWriteStream = require('./streams/createWriteStream');
@@ -26,11 +26,11 @@ module.exports = () => {
       outputWriteStream,
       (error) => {
         if (error) {
-          console.error('Pipeline failed.', error);
+          logError('Pipeline failed.', error);
         }
       }
     );
   } catch (error) {
-    console.error('Something went wrong.', error.message);
+    logError('Something went wrong.', error.message);
   }
 }
