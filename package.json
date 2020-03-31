@@ -23,7 +23,6 @@
     "node": ">=12"
   },
   "dependencies": {
-    "caesar-shift": "^1.0.0",
     "commander": "^5.0.0"
   },
   "devDependencies": {}
