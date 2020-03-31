@@ -1,0 +1,29 @@
+{
+  "name": "caesar-cipher-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marinovich/caesar-cipher-cli.git"
+  },
+  "author": "Alexander Marinovich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marinovich/caesar-cipher-cli/issues"
+  },
+  "bin": {
+    "caesar-cipher": "bin/outside"
+  },
+  "homepage": "https://github.com/marinovich/caesar-cipher-cli#readme",
+  "dependencies": {
+    "minimist": "^1.2.5"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "preferGlobal": true
+}
