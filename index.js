@@ -1,33 +1,36 @@
-const minimist = require('minimist');
+const program = require('commander');
 const error = require('./utils/error');
+const { pipeline } = require('stream');
+const createReadStream = require('./streams/createReadStream');
+const createWriteStream = require('./streams/createWriteStream');
+const createCipherTransform = require('./streams/createCipherTransform');
 
 module.exports = () => {
-  const args = minimist(process.argv.slice(2))
-  let command = args._[0] || 'help';
+  try {
+    const { input, output, action, shift } = program
+      .storeOptionsAsProperties(false)
+      .requiredOption('-s, --shift <number>', 'a shift')
+      .requiredOption('-a, --action <encode|decode>', 'an action')
+      .option('-i, --input <file>', 'an input file')
+      .option('-o, --output <file>', 'an output file')
+      .parse(process.argv)
+      .opts();
 
-  if (args.version || args.v) {
-    command = 'version';
-  }
+    const inputReadStream = createReadStream(input);
+    const outputWriteStream = createWriteStream(output);
+    const cipherTransform = createCipherTransform(shift, action, action);
 
-  if (args.help || args.h) {
-    command = 'help';
-  }
-
-  switch (command) {
-    case 'today':
-      require('./commands/today')(args)
-      break
-
-    case 'version':
-      require('./commands/version')(args)
-      break
-
-    case 'help':
-      require('./commands/help')(args)
-      break
-
-    default:
-      error(`"${command}" is not a valid command!`, true)
-      break
+    pipeline(
+      inputReadStream,
+      cipherTransform,
+      outputWriteStream,
+      (error) => {
+        if (error) {
+          console.error('Pipeline failed.', error);
+        }
+      }
+    );
+  } catch (error) {
+    console.error('Something went wrong.', error.message);
   }
 }

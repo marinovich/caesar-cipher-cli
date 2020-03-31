@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/marinovich/caesar-cipher-cli#readme",
   "engines": {
-    "node": ">=8"
+    "node": ">=12"
   },
-  "preferGlobal": true,
   "dependencies": {
+    "caesar-shift": "^1.0.0",
     "commander": "^5.0.0"
   },
   "devDependencies": {}
