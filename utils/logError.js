@@ -4,7 +4,7 @@
  * @param {any[]} args
  */
 const logError = (message, ...args) => {
-  console.error(message, ...args);
+  process.stderr.write(message, ...args);
   process.exit(1);
 };
 
