@@ -16,14 +16,10 @@ module.exports = () => {
       .parse(process.argv)
       .opts();
 
-    const inputReadStream = createReadStream(input);
-    const outputWriteStream = createWriteStream(output);
-    const cipherTransform = createCipherTransform(shift, action);
-
     pipeline(
-      inputReadStream,
-      cipherTransform,
-      outputWriteStream,
+      createReadStream(input),
+      createCipherTransform(shift, action),
+      createWriteStream(output),
       (error) => {
         if (error) {
           logError('Pipeline failed.', error);

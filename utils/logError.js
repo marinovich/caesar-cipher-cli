@@ -1,6 +1,11 @@
-const logError = (message, exit) => {
-  console.error(message)
-  exit && process.exit(1)
+/**
+ * Logs errors
+ * @param {string} message
+ * @param {any[]} args
+ */
+const logError = (message, ...args) => {
+  console.error(message, ...args);
+  process.exit(1);
 };
 
 module.exports = logError;
