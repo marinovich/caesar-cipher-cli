@@ -6,13 +6,13 @@ class CipherTransform extends Transform {
    *
    * @param {*} transformOptions
    * @param {number} shift
-   * @param {string} actionType
+   * @param {Function} action
    */
-  constructor(transformOptions, shift, actionType) {
+  constructor(transformOptions, shift, action) {
     super(transformOptions);
 
     this.shift = shift;
-    this.actionType = actionType;
+    this.action = action;
   }
 
   /**
@@ -23,22 +23,27 @@ class CipherTransform extends Transform {
    */
   _transform(chunk, encoding, callback) {
     try {
-      let result;
-
-      switch (this.actionType) {
-        case 'encode': result = encrypt(this.shift, chunk.toString()); break;
-        case 'decode': result = decrypt(this.shift, chunk.toString()); break;
-        default: throw new Error('Please use only decode/encode action type');
-      }
-
-      callback(null, result);
+      callback(null, this.action(this.shift, chunk.toString()));
     } catch (error) {
       callback(error);
     }
   }
 }
 
-const createCipherTransform = (shift, action) => {
+/**
+ * Creates transform stream, which encrypts string with the caesar cipher
+ * @param {number} shift
+ * @param {string} actionType
+ */
+const createCipherTransform = (shift, actionType) => {
+  let action;
+
+  switch (actionType) {
+    case 'encode': action = encrypt; break;
+    case 'decode': action = decrypt; break;
+    default: throw new Error('Please use only decode/encode action type');
+  }
+
   return new CipherTransform({ encoding: 'utf-8' }, shift, action);
 }
 
