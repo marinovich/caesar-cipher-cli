@@ -1,0 +1,9 @@
+const ABC_LENGTH = 26;
+const LOWERCASE_SHIFT = 97;
+const UPPERCASE_SHIFT = 65;
+
+module.exports = {
+  ABC_LENGTH,
+  LOWERCASE_SHIFT,
+  UPPERCASE_SHIFT
+};
